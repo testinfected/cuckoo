@@ -1,5 +1,6 @@
 Given /^a proposition about (?:a )?(.+)$/ do |subject|
-  go_to :new_proposal_page
+  go_to :proposals_page
+  open_new_proposal
   create_proposal :about => subject
 end
 
