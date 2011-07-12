@@ -3,37 +3,28 @@ require 'spec_helper'
 describe VotesController do
 
   before(:each) do
-    @proposal = mock_model(Proposal)
-    @votes = double()
-    @vote = double()
+    @proposal = mock_model(Proposal, :id => 1234)
+    Proposal.should_receive(:find).with(@proposal.id).and_return(@proposal)
   end
 
-  specify "a new vote is created from proposal build helper" do
-    Proposal.should_receive(:find).and_return(@proposal)
-    @proposal.should_receive(:votes).and_return(@votes)
-    @votes.should_receive(:build).and_return(@vote)
-    get :new, :proposal_id => :any
+  describe "GET new" do
+    it "assigns the proposal and a new vote" do
+      get :new, :proposal_id => @proposal.id
+      assigns(:proposal).should == @proposal
+      assigns(:vote).should be_a_new(Vote)
+    end
   end
 
-  specify "the new vote and the proposal are both passed to the view" do
-    Proposal.should_receive(:find).and_return(@proposal)
-    @proposal.should_receive(:votes).and_return(@votes)
-    @votes.should_receive(:build).and_return(@vote)
-    get :new, :proposal_id => :any
-    assigns(:vote).should == @vote
-    assigns(:proposal).should == @proposal
+  describe "POST create" do
+    before(:each) do
+      @vote = mock_model(Vote).as_new_record
+      @proposal.stub_chain(:votes, :build).and_return(@vote.as_null_object)
+    end
+
+    it "creates a new vote and redirects to proposal list" do
+      @vote.should_receive(:save!).and_return(true)
+      post :create, :proposal_id => @proposal.id
+      response.should redirect_to(:controller => 'proposals', :action => 'index')
+    end
   end
-
-  specify "new vote creation should redirect to proposal list" do
-    post :create, :proposal_id => :any
-    response.should redirect_to proposals_path
-  end
-
-  specify "new vote should be saved" do
-    vote_number = Vote.count
-    post :create, :proposal_id => :any
-    Vote.count.should == vote_number + 1
-  end
-
-
 end

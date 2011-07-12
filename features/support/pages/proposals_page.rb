@@ -6,7 +6,7 @@ module ProposalsPage
 
   def participate_in_vote(proposal)
     proposal = Proposal.find_last_by_subject(proposal[:about])
-    follow "vote", :within => "tr#proposal_#{proposal.id}"
+    follow "Vote", :within => "tr#proposal_#{proposal.id}"
   end
 end
 

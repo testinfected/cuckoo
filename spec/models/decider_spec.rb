@@ -1,19 +1,20 @@
-require "rspec"
+require "spec_helper"
 
+describe Decider do
 
+  context "when there is no vote" do
+    let(:no_vote) { [] }
 
-describe "Decider" do
-
-  before(:each) do
-    @decider = Decider.new
+    it "suggests to drop proposal" do
+      subject.tally(no_vote).should be_kind_of(Decider::Drop)
+    end
   end
 
-  it "should be to drop the proposition when there is no votes" do
-    @decider.tally([]).should be_kind_of(Decider::Drop)
-  end
+  context "when votes have been cast" do
+    let(:votes) { [Vote.make, Vote.make, Vote.make] }
 
-  it "should be to adopt the proposition when there are votes" do
-    @decider.tally([Vote.make]).should be_kind_of(Decider::Adopt)
+    it "suggests to adopt proposal" do
+      subject.tally(votes).should be_kind_of(Decider::Adopt)
+    end
   end
-
 end

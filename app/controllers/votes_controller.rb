@@ -1,15 +1,20 @@
 class VotesController < ApplicationController
+  before_filter :find_proposal
+
+  respond_to :html
 
   def new
-    @proposal = Proposal.find(params[:proposal_id])
-    @vote = @proposal.votes.build
+    respond_with(@vote = Vote.new)
   end
 
   def create
-    vote = Vote.create!(params[:vote])
-    vote.proposal_id= params[:proposal_id]
-    vote.save
-    redirect_to proposals_path
+    vote = @proposal.votes.build(params[:vote])
+    vote.save!
+    redirect_to(proposals_path)
   end
 
+  private
+  def find_proposal
+    @proposal = Proposal.find(params[:proposal_id])
+  end
 end

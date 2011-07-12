@@ -3,20 +3,19 @@ require 'spec_helper'
 describe "votes/new.html.haml" do
 
   before(:each) do
-    @proposal = Proposal.make!
-    @vote = @proposal.votes.build
-    assigns[:proposal] = @proposal
-    assigns[:vote] = @vote
+    assign(:proposal, @proposal = Proposal.make(:id => 1234))
+    assign(:vote, @vote = @proposal.votes.build)
     render
   end
 
-  it "should remind the proposal" do
+  it "displays the proposal" do
     rendered.should have_content(@proposal.subject)
     rendered.should have_content(@proposal.wording)
   end
 
-  it "should have a button to vote yes" do
-    rendered.should have_selector("input", :id=>"yes", :value=>"yes")
+  it "has a button to vote yes on proposal" do
+    rendered.should have_selector("form", :action => proposal_votes_path(@proposal), :method => 'post') do |form|
+      form.should have_selector("input[type=submit]#yes")
+    end
   end
-
 end

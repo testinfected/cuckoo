@@ -1,11 +1,12 @@
 %h2 Proposals
 
-%table(id='proposals')
+%table#proposals
   %tr
+    %th Subject
     %th Outcome
 
   - @proposals.each do |proposal|
     %tr[proposal]
-      %td.subject= link_to proposal.subject, proposal_path(proposal)
-      %td.outcome= proposal.outcome
-      %td.vote= link_to "vote", new_proposal_vote_path(proposal)
+      %td= link_to proposal.subject, proposal_path(proposal)
+      %td= proposal.outcome
+      %td= link_to "Vote", new_proposal_vote_path(proposal)

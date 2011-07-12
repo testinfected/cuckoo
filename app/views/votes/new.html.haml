@@ -1,11 +1,11 @@
 %h2 Your vote
 
 = semantic_form_for [@proposal, @vote] do |form|
-  = form.inputs :for => @proposal do |f|
-    .subject #{@proposal.subject}
-    .wording #{@proposal.wording}
+  %ol
+    %li.subject= @proposal.subject
+    %li.wording= @proposal.wording
 
   = form.buttons do
-    = form.commit_button :button_html => { :id => "yes", :value=>"yes" }
+    = form.commit_button "yes", :button_html => { :id => "yes" }
 
 

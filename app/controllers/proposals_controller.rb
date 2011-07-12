@@ -1,19 +1,21 @@
 class ProposalsController < ApplicationController
+  respond_to :html
+
   def index
-    @proposals = Proposal.all
+    respond_with(@proposals = Proposal.all)
   end
 
   def new
-    @proposal = Proposal.new
+    respond_with(@proposal = Proposal.new)
   end
 
   def create
-    Proposal.create!(params[:proposal])
-    redirect_to proposals_path
+    proposal = Proposal.new(params[:proposal])
+    proposal.save!
+    redirect_to(proposals_path)
   end
 
   def show
-    @proposal = Proposal.find(params[:id])
+    respond_with(@proposal = Proposal.find(params[:id]))
   end
-
 end

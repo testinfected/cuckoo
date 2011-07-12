@@ -1,4 +1,4 @@
-require 'Protocol'
+require 'protocol'
 
 class Decider < Protocol
 
