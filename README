@@ -1,0 +1,26 @@
+vision
+
+permettre de prendre des décisions via mon réseau social
+
+
+fonctionnalités
+
+soumettre une proposition à un cercle
+relancer quelqu'un à participer à un vote
+voter sur une proposition
+connaître le vote du groupe sur une proposition
+
+communiquer par mail
+communiquer par twitter
+voter depuis un mobile via web ou twitter
+
+pusher une proposition sur les mobiles
+
+annuler une proposition
+entériner une proposition
+
+conseiller le proposant sur la décision recommandée en se basant sur le vote du groupe
+conseiller d'annuler une proposition s'il manque des votes après un temps donné
+conseils basés sur le % de non, le nombre de votant, une timebox
+
+obtenir des points d'équipe pour chaque proposition entérinée
