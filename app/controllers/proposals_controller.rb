@@ -11,4 +11,9 @@ class ProposalsController < ApplicationController
     Proposal.create!(params[:proposal])
     redirect_to proposals_path
   end
+
+  def show
+    @proposal = Proposal.find(params[:id])
+  end
+
 end

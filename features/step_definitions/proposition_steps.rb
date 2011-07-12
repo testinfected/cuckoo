@@ -11,3 +11,12 @@ Then /^the outcome is to drop "(.+)"$/ do |subject|
   go_to :proposals_page
   should_show_proposal_outcome(subject, "drop")
 end
+When /^someone votes yes on "(.+)"$/ do |subject|
+  go_to :proposals_page
+  click_link("vote")
+  click_button("yes")
+end
+Then /^the outcome is to adopt "(.+)"$/ do |subject|
+  go_to :proposals_page
+  should_show_proposal_outcome(subject, "adopt")
+end

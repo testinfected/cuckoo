@@ -35,17 +35,21 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'shoulda'
 end
 
 group :test do
   gem 'webrat'
-  # Pretty printed test output
+    # Pretty printed test output
   gem 'turn', :require => false
   gem 'cucumber-rails'
   gem 'database_cleaner'
   gem 'machinist', '~> 2.0.0.beta'
   gem 'faker'
+  gem 'spork', '~> 0.9.0.rc'
   gem 'guard-cucumber'
-  gem 'spork'
   gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'growl'
+
 end

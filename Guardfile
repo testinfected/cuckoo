@@ -7,7 +7,8 @@ guard 'spork', :wait => 30, :test_unit => false, :cucumber_env => { 'RAILS_ENV' 
   watch(%r{^config/environments/.+\.rb$})
   watch(%r{^config/initializers/.+\.rb$})
   watch('spec/spec_helper.rb')
-  watch('cucumber/support/env.rb')
+  watch('features/support/env.rb')
+  watch('Gemfile')
 end
 
 guard 'rspec', :version => 2, :cli => '--drb --color --format documentation', :bundler => false do

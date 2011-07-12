@@ -6,5 +6,6 @@
 
   - @proposals.each do |proposal|
     %tr[proposal]
-      %td.subject= proposal.subject
-      %td= proposal.outcome
+      %td.subject= link_to proposal.subject, proposal_path(proposal)
+      %td.outcome= proposal.outcome
+      %td.vote= link_to "vote", new_proposal_vote_path(proposal)
