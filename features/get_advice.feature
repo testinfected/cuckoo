@@ -3,10 +3,9 @@ Feature: Involve a circle
   As a proposer
   I want to leverage the wisdom of my circle
 
-
   Scenario: drop it when there is no vote
     Given a proposition
     When there is no vote
-    Then the advice is to drop the proposition
+    Then the outcome is to drop the proposition
 
 

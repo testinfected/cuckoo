@@ -5,6 +5,8 @@
 # files.
 
 require 'cucumber/rails'
+require File.expand_path(File.dirname(__FILE__) + '/../../spec/support/blueprints')
+require 'decider'
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
