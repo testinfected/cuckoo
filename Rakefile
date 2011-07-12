@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Coucou::Application.load_tasks
+Cuckoo::Application.load_tasks

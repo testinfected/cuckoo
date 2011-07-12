@@ -1,4 +1,4 @@
-Coucou::Application.routes.draw do
+Cuckoo::Application.routes.draw do
 
   resources :proposals
 

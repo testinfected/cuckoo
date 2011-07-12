@@ -55,7 +55,7 @@ Spork.each_run do
   # This code will be run each time you run your specs.
 
   # Reload routes
-  Coucou::Application.reload_routes!
+  Cuckoo::Application.reload_routes!
 
   # Reload blueprints
   load "#{Rails.root}/spec/support/blueprints.rb"
