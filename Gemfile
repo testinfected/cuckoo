@@ -43,6 +43,7 @@ group :test do
     # Pretty printed test output
   gem 'turn', :require => false
   gem 'cucumber-rails'
+  gem 'kelp'
   gem 'database_cleaner'
   gem 'machinist', '~> 2.0.0.beta'
   gem 'faker'

@@ -25,6 +25,12 @@ Spork.prefork do
   require 'cucumber/rails'
   #Capybara.default_driver = :selenium
 
+  require 'kelp'
+  World(Kelp::Visibility)
+  World(Kelp::Field)
+  World(Kelp::Navigation)
+  World(Kelp::Scoping)
+
   # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
   # order to ease the transition to Capybara we set the default here. If you'd
   # prefer to use XPath just remove this line and adjust any selectors in your
@@ -78,6 +84,7 @@ Spork.each_run do
   # This code will be run each time you run your specs.
   DatabaseCleaner.clean
 
+  # Do we need the following?
   # Reset the world
-  require 'cucumber/rails/world'
+  #require 'cucumber/rails/world'
 end

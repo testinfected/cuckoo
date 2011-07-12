@@ -1,16 +1,16 @@
-Feature: Involve a circle
-  In order to make the best decision
+Feature: Involve a circle in a decision
+  In order to make the best possible decision
   As a proposer
   I want to leverage the wisdom of my circle
 
-  Scenario: suggest to drop proposition when there is no vote
-    Given a proposition about "tonight's dinner"
-    When there is no vote on "tonight's dinner"
-    Then the outcome is to drop "tonight's dinner"
+  Scenario: Drop proposition when there is no vote
+    Given a proposition about a subject
+    When there is no vote on the subject
+    Then the outcome is to drop the proposition about the subject
 
-  Scenario: suggest to adopt proposition when there are only yes votes
-    Given a proposition about "tomorrow's dinner"
-    When someone votes yes on "tomorrow's dinner"
-    Then the outcome is to adopt "tomorrow's dinner"
+  Scenario: Adopt proposition when there are only yes votes
+    Given a proposition about a subject
+    When someone votes yes on the subject
+    Then the outcome is to adopt the proposition about the subject
 
 

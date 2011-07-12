@@ -1,9 +1,9 @@
 module NewProposalPage
-  def create_proposal(subject, wording = 'this is what I propose')
-    within('#new_proposal') do
-      fill_in 'proposal_subject', :with => subject
-      fill_in 'proposal_wording', :with => wording
-      click_button 'proposal_submit'
+  def create_proposal(proposal)
+    proposal[:proposition] ||= ""
+    in_scope :within => "#new_proposal" do
+      fill_in_fields 'proposal_subject' => proposal[:about], 'proposal_wording' => proposal[:proposition]
+      press 'proposal_submit'
     end
   end
 end
