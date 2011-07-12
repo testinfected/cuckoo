@@ -25,6 +25,14 @@ gem 'formtastic', '~> 2.0.0.rc'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+# Use guard to automatically run specs and restart spork when needed
+group :development do
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'growl'
+  gem 'rb-fsevent'
+end
+
 group :development, :test do
   gem 'rspec-rails'
 end
@@ -37,4 +45,7 @@ group :test do
   gem 'database_cleaner'
   gem 'machinist', '~> 2.0.0.beta'
   gem 'faker'
+  gem 'guard-cucumber'
+  gem 'spork'
+  gem 'guard-spork'
 end

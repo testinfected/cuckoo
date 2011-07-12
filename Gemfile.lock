@@ -70,6 +70,17 @@ GEM
       rails (~> 3.0)
     gherkin (2.4.1)
       json (>= 1.4.6)
+    growl (1.0.3)
+    guard (0.5.0)
+      thor (~> 0.14.6)
+    guard-cucumber (0.5.2)
+      cucumber (>= 0.10)
+      guard (>= 0.4.0)
+    guard-rspec (0.4.0)
+      guard (>= 0.4.0)
+    guard-spork (0.2.0)
+      guard (>= 0.2.2)
+      spork (>= 0.8.4)
     haml (3.1.2)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
@@ -117,6 +128,7 @@ GEM
       rdoc (~> 3.4)
       thor (~> 0.14.6)
     rake (0.9.2)
+    rb-fsevent (0.4.1)
     rdoc (3.8)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
@@ -143,6 +155,7 @@ GEM
       ffi (>= 1.0.7)
       json_pure
       rubyzip
+    spork (0.8.5)
     sprockets (2.0.0.beta.10)
       hike (~> 1.0)
       rack (~> 1.0)
@@ -175,12 +188,19 @@ DEPENDENCIES
   database_cleaner
   faker
   formtastic (~> 2.0.0.rc)
+  growl
+  guard
+  guard-cucumber
+  guard-rspec
+  guard-spork
   haml-rails
   jquery-rails
   machinist (~> 2.0.0.beta)
   rails (~> 3.1.0.rc)
+  rb-fsevent
   rspec-rails
   sass-rails (~> 3.1.0.rc)
+  spork
   sqlite3
   turn
   uglifier

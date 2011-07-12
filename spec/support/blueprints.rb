@@ -1,5 +1,3 @@
-require 'machinist/active_record'
-
 # Add your blueprints here.
 #
 # e.g.

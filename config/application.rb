@@ -42,5 +42,12 @@ module Coucou
     config.generators do |g|
       g.fixture_replacement :machinist
     end
+
+    # Add this for Spork
+    if Rails.env.test? && defined?(Spork) && Spork.using_spork?
+      initializer :after => :initialize_dependency_mechanism do
+        ActiveSupport::Dependencies.mechanism = :load
+      end
+    end
   end
 end
