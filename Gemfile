@@ -13,6 +13,8 @@ gem 'coffee-script'
 gem 'uglifier'
 
 gem 'jquery-rails'
+gem 'haml-rails'
+gem 'formtastic', '~> 2.0.0.rc'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -28,6 +30,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'webrat'
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'cucumber-rails'

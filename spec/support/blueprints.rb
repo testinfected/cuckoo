@@ -9,5 +9,6 @@ require 'machinist/active_record'
 #   end
 
 Proposal.blueprint do
+  subject { Faker::Lorem.sentence}
   wording { Faker::Lorem.paragraph }
 end

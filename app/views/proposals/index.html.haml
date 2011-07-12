@@ -1,0 +1,10 @@
+%h2 Proposals
+
+%table(id='proposals')
+  %tr
+    %th Outcome
+
+  - @proposals.each do |proposal|
+    %tr[proposal]
+      %td.subject= proposal.subject
+      %td= proposal.outcome

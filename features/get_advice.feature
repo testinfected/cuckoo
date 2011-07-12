@@ -4,8 +4,8 @@ Feature: Involve a circle
   I want to leverage the wisdom of my circle
 
   Scenario: drop it when there is no vote
-    Given a proposition
-    When there is no vote
-    Then the outcome is to drop the proposition
+    Given a proposition about "tonight's dinner"
+    When there is no vote on "tonight's dinner"
+    Then the outcome is to drop "tonight's dinner"
 
 

@@ -1,4 +1,9 @@
 module NavigationHelpers
+
+  def go_to(page_name)
+    visit path_to(page_name.to_s.gsub(/_/, ' '))
+  end
+
   # Maps a name to a path. Used by the
   #
   #   When /^I go to (.+)$/ do |page_name|
@@ -10,6 +15,12 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/'
+
+    when /^(the )?proposals page$/
+      '/proposals'
+
+    when /^(the )?new proposal page$/
+      '/proposals/new'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
