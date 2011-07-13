@@ -19,6 +19,7 @@ describe Decider do
   end
 
   it "exposes yes choice" do
-    subject.choice.should == Decider::Yes
+    subject.choice.should be_kind_of(Decider::Yes)
+    Decider::Yes.new.to_s.should == "yes"
   end
 end

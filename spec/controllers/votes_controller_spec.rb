@@ -22,6 +22,7 @@ describe VotesController do
     end
 
     it "creates a new vote and redirects to proposal list" do
+      @vote.should_receive(:value=)
       @vote.should_receive(:save!).and_return(true)
       post :create, :proposal_id => @proposal.id
       response.should redirect_to(:controller => 'proposals', :action => 'index')

@@ -6,11 +6,13 @@ class Decider < Protocol
   attr_reader :choice
 
   def initialize
-    @choice = Yes
+    @choice = Yes.new
   end
 
   class Yes < Protocol::Choice
-
+    def to_s
+      "yes"
+    end
   end
   class Drop < Protocol::Outcome
     def to_s

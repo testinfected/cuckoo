@@ -9,6 +9,7 @@ class VotesController < ApplicationController
 
   def create
     vote = @proposal.votes.build(params[:vote])
+    vote.value = params[:commit]
     vote.save!
     redirect_to(proposals_path)
   end
