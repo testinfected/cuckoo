@@ -34,7 +34,7 @@ describe "proposals/index.html.haml" do
     end
 
     it "should display one proposal per line" do
-      rendered.should have_selector("tr[id^='proposal']", :count => @proposals.size)
+      rendered.should have_selector("tr[id^='proposal_']", :count => @proposals.size)
     end
   end
 end

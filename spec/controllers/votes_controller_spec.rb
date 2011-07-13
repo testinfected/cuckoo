@@ -17,8 +17,8 @@ describe VotesController do
 
   describe "POST create" do
     before(:each) do
-      @vote = mock_model(Vote).as_new_record
-      @proposal.stub_chain(:votes, :build).and_return(@vote.as_null_object)
+      @vote = mock_model(Vote).as_null_object
+      @proposal.stub_chain(:votes, :build).and_return(@vote)
     end
 
     it "creates a new vote and redirects to proposal list" do
