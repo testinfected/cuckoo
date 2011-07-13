@@ -17,4 +17,8 @@ describe Decider do
       subject.tally(votes).should be_kind_of(Decider::Adopt)
     end
   end
+
+  it "exposes yes choice" do
+    subject.choice.should == Decider::Yes
+  end
 end
