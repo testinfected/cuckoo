@@ -39,8 +39,10 @@ describe "votes/new.html.haml" do
     end
 
     it "displays the current number of votes" do
-      votes = [Vote.make(:value => "first")]
-      @proposal.should_receive(:votes).exactly(2).times.and_return(votes)
+      breakdown = {}
+      breakdown["first"] = 1
+      breakdown["second"] = 0
+      @proposal.should_receive(:breakdown).and_return(breakdown)
       render
       rendered.should match_selector(".results") do |results|
         results.should contain("1 first")

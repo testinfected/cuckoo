@@ -15,8 +15,6 @@
 %br
 .results
   %h4 Current results
-  - @proposal.protocol.choices.each do |choice|
-    - n = 0
-    - @proposal.votes.each do |vote|
-      - n=n+1 if vote.value == choice.to_s
-    = n.to_s + " " + choice.to_s
+  - breakdown = @proposal.breakdown
+  - breakdown.keys.sort.each do |choice|
+    = breakdown[choice].to_s + " " + choice.to_s
