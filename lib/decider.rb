@@ -9,10 +9,6 @@ class Decider < Protocol
     @choices = [Yes.new, No.new]
   end
 
-  def choice
-    @choices[0]
-  end
-
   class Yes < Protocol::Choice
     def to_s
       "yes"
@@ -34,7 +30,11 @@ class Decider < Protocol
     end
   end
 
+  def has_no?(votes)
+    ! votes.select { |vote| vote.value == No.new.to_s }.empty?
+  end
+
   def tally(votes)
-    votes.empty? ? Drop.new : Adopt.new
+    has_no?(votes) || votes.empty? ? Drop.new : Adopt.new
   end
 end

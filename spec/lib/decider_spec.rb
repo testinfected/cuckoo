@@ -10,11 +10,19 @@ describe Decider do
     end
   end
 
-  context "when votes have been cast" do
-    let(:votes) { [Vote.make, Vote.make, Vote.make] }
+  context "when there is only a yes vote" do
+    let(:votes) { [Vote.make( :value => Decider::Yes.new.to_s )] }
 
     it "suggests to adopt proposal" do
       subject.tally(votes).should be_kind_of(Decider::Adopt)
+    end
+  end
+
+  context "when there is only a no vote" do
+    let(:votes) { [Vote.make( :value => Decider::No.new.to_s )] }
+
+    it "suggests to drop proposal" do
+      subject.tally(votes).should be_kind_of(Decider::Drop)
     end
   end
 
