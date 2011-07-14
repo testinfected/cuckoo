@@ -18,8 +18,10 @@ describe Decider do
     end
   end
 
-  it "exposes yes choice" do
-    subject.choice.should be_kind_of(Decider::Yes)
+  it "exposes yes and no choice" do
+    subject.choices[0].should be_kind_of(Decider::Yes)
+    subject.choices[1].should be_kind_of(Decider::No)
     Decider::Yes.new.to_s.should == "yes"
+    Decider::No.new.to_s.should == "no"
   end
 end

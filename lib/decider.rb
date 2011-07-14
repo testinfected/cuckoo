@@ -3,15 +3,24 @@ require 'protocol'
 class Decider < Protocol
 
 
-  attr_reader :choice
+  attr_reader :choices
 
   def initialize
-    @choice = Yes.new
+    @choices = [Yes.new, No.new]
+  end
+
+  def choice
+    @choices[0]
   end
 
   class Yes < Protocol::Choice
     def to_s
       "yes"
+    end
+  end
+  class No < Protocol::Choice
+    def to_s
+      "no"
     end
   end
   class Drop < Protocol::Outcome
