@@ -1,11 +1,15 @@
 %h2 Your vote
 
-%ol
-  %li.subject= @proposal.subject
-  %li.wording= @proposal.wording
+.subject
+  Subject:
+  = @proposal.subject
 
-= semantic_form_for [@proposal, @vote] do |form|
-  = form.buttons do
-    = form.commit_button @proposal.protocol.choice.to_s, :button_html => { :id => @proposal.protocol.choice.to_s }
+.wording:
+  = @proposal.wording
+
+%p
+- @proposal.protocol.choices.each do |choice|
+  = semantic_form_for [@proposal, @vote] do |form|
+    = form.commit_button choice.to_s, :button_html => { :id => choice.to_s }
 
 
