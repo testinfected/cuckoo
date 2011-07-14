@@ -20,4 +20,34 @@ describe "votes/new.html.haml" do
       form.should have_selector("input[type=submit][value=second]#second")
     end
   end
+
+  describe "votes breakdown" do
+
+    before(:each) do
+      assign(:proposal, @proposal = Proposal.make(:id => 1234))
+      assign(:vote, @vote = @proposal.votes.build)
+      @proposal.stub_chain(:protocol, :choices).and_return(["first", "second"])
+    end
+
+    specify "displays zero when there is no vote" do
+      render
+      rendered.should have_selector(".results")
+      rendered.should match_selector(".results") do |results|
+        results.should contain("0 first")
+        results.should contain("0 second")
+      end
+    end
+
+    it "displays the current number of votes" do
+      votes = [Vote.make(:value => "first")]
+      @proposal.should_receive(:votes).exactly(2).times.and_return(votes)
+      render
+      rendered.should match_selector(".results") do |results|
+        results.should contain("1 first")
+        results.should contain("0 second")
+      end
+    end
+
+  end
+
 end

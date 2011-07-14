@@ -1,15 +1,22 @@
-%h2 Your vote
+.proposition
+  %h2 Proposition
+  .subject
+    Subject:
+    = @proposal.subject
+  .wording:
+    = @proposal.wording
 
-.subject
-  Subject:
-  = @proposal.subject
+.vote
+  %h2 Your vote
+  - @proposal.protocol.choices.each do |choice|
+    = semantic_form_for [@proposal, @vote] do |form|
+      = form.commit_button choice.to_s, :button_html => { :id => choice.to_s }
 
-.wording:
-  = @proposal.wording
-
-%p
-- @proposal.protocol.choices.each do |choice|
-  = semantic_form_for [@proposal, @vote] do |form|
-    = form.commit_button choice.to_s, :button_html => { :id => choice.to_s }
-
-
+%br
+.results
+  %h4 Current results
+  - @proposal.protocol.choices.each do |choice|
+    - n = 0
+    - @proposal.votes.each do |vote|
+      - n=n+1 if vote.value == choice.to_s
+    = n.to_s + " " + choice.to_s
