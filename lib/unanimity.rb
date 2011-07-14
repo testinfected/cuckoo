@@ -1,6 +1,6 @@
 require 'protocol'
 
-class Decider < Protocol
+class Unanimity < Protocol
 
 
   attr_reader :choices
