@@ -13,8 +13,8 @@ Then /^the outcome is to (.+) the proposition about (?:the )(.+)$/ do |suggested
   should_show_proposal_outcome suggested, :about => subject
 end
 
-When /^someone votes yes on (?:the )(.+)$/ do |subject|
+When /^someone votes (.+) on (?:the )(.+)$/ do |choice, subject|
   go_to :proposals_page
   participate_in_vote :about => subject
-  cast_vote "yes"
+  cast_vote choice
 end

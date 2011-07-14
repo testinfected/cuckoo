@@ -13,4 +13,9 @@ Feature: Involve a circle in a decision
     When someone votes yes on the subject
     Then the outcome is to adopt the proposition about the subject
 
+  Scenario: Drop proposition when there are as much no votes than yes votes
+    Given a proposition about a subject
+    When someone votes yes on the subject
+    And someone votes no on the subject
+    Then the outcome is to drop the proposition about the subject
 
