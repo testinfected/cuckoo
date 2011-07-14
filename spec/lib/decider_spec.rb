@@ -1,5 +1,13 @@
 require "spec_helper"
 
+def yes_vote
+  Vote.make(:value => Decider::Yes.new.to_s)
+end
+
+def no_vote
+  Vote.make(:value => Decider::No.new.to_s)
+end
+
 describe Decider do
 
   context "when there is no vote" do
@@ -10,16 +18,16 @@ describe Decider do
     end
   end
 
-  context "when there is only a yes vote" do
-    let(:votes) { [Vote.make( :value => Decider::Yes.new.to_s )] }
+  context "when there are only yes votes" do
+    let(:votes) { [yes_vote, yes_vote, yes_vote] }
 
     it "suggests to adopt proposal" do
       subject.tally(votes).should be_kind_of(Decider::Adopt)
     end
   end
 
-  context "when there is only a no vote" do
-    let(:votes) { [Vote.make( :value => Decider::No.new.to_s )] }
+  context "when there is a no vote" do
+    let(:votes) { [yes_vote, no_vote, yes_vote] }
 
     it "suggests to drop proposal" do
       subject.tally(votes).should be_kind_of(Decider::Drop)
