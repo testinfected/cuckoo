@@ -21,7 +21,7 @@ describe VotesController do
       @proposal.stub_chain(:votes, :build).and_return(@vote)
     end
 
-    it "creates a new vote with value set to the choice made and redirects to proposal list" do
+    it "creates a new vote reflecting the choice made and redirects to proposal list" do
       @vote.should_receive(:value=).with("choice")
       @vote.should_receive(:save!).and_return(true)
       post :create, :proposal_id => @proposal.id, :commit => "choice"

@@ -21,5 +21,4 @@ class Proposal < ActiveRecord::Base
     }
     votes_breakdown
   end
-
 end

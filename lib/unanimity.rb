@@ -1,8 +1,6 @@
 require 'protocol'
 
 class Unanimity < Protocol
-
-
   attr_reader :choices
 
   def initialize
@@ -31,7 +29,7 @@ class Unanimity < Protocol
   end
 
   def has_no?(votes)
-    ! votes.select { |vote| vote.value == No.new.to_s }.empty?
+    votes.detect { |vote| vote.value == No.new.to_s }
   end
 
   def tally(votes)

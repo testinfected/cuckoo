@@ -16,6 +16,6 @@ Feature: Involve a circle in a decision
   Scenario: Drop proposition when there is a no vote
     Given a proposition about a subject
     When someone votes yes on the subject
-    When someone votes no on the subject
+    And someone votes no on the subject
     Then the outcome is to drop the proposition about the subject
 

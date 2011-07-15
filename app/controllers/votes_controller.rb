@@ -7,6 +7,7 @@ class VotesController < ApplicationController
     respond_with(@vote = Vote.new)
   end
 
+  #todo Make choice part of the vote params to remove the need to write the value
   def create
     vote = @proposal.votes.build(params[:vote])
     vote.value = params[:commit]
