@@ -2,6 +2,10 @@ require "spec_helper"
 
 describe Unanimity do
 
+  specify "string representation" do
+    subject.to_s.should == "Unanimity"
+  end
+
   it "gives the choice of yes or no" do
     subject.choices[0].should be_kind_of(Unanimity::Yes)
     subject.choices[1].should be_kind_of(Unanimity::No)

@@ -4,7 +4,7 @@ class Proposal < ActiveRecord::Base
   has_many :votes
 
   def protocol
-    Unanimity.new
+    self.protocol_class==nil ? Unanimity.new : Object::const_get(self.protocol_class).new()
   end
 
   def outcome

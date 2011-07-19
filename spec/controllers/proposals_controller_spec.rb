@@ -19,6 +19,7 @@ describe ProposalsController do
     it "assigns a new proposal" do
       get :new
       assigns(:proposal).should be_a_new(Proposal)
+      assigns(:protocols).should == [ Unanimity.new.to_s, Majority.new.to_s ]
     end
   end
 
@@ -36,7 +37,7 @@ describe ProposalsController do
 
   describe "POST create" do
     before(:each) do
-      @proposal_hash = { 'subject' => 'a subject', 'wording' => 'a proposition' }
+      @proposal_hash = { 'subject' => 'a subject', 'wording' => 'a proposition', 'protocol' => 'a protocol' }
       @proposal = mock_model(Proposal).as_new_record
       Proposal.should_receive(:new).with(@proposal_hash).and_return(@proposal)
     end

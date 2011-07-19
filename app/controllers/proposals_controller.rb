@@ -1,3 +1,6 @@
+require 'unanimity'
+require 'majority'
+
 class ProposalsController < ApplicationController
   respond_to :html
 
@@ -6,7 +9,8 @@ class ProposalsController < ApplicationController
   end
 
   def new
-    respond_with(@proposal = Proposal.new)
+    @proposal = Proposal.new
+    @protocols = [ Unanimity.new.to_s, Majority.new.to_s ]
   end
 
   def create

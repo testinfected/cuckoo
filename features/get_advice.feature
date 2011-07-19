@@ -3,19 +3,15 @@ Feature: Involve a circle in a decision
   As a proposer
   I want to leverage the wisdom of my circle
 
-  Scenario: Drop proposition when there is no vote
-    Given a proposition about a subject
-    When there is no vote on the subject
-    Then the outcome is to drop the proposition about the subject
+  Scenario Outline:
+    Given a proposition set up with <protocol> about a subject
+    When there are <yes> votes and <no> votes on the subject
+    Then the outcome is to <adopt or drop> the proposition about the subject
 
-  Scenario: Adopt proposition when there are only yes votes
-    Given a proposition about a subject
-    When someone votes yes on the subject
-    Then the outcome is to adopt the proposition about the subject
-
-  Scenario: Drop proposition when there is a no vote
-    Given a proposition about a subject
-    When someone votes yes on the subject
-    And someone votes no on the subject
-    Then the outcome is to drop the proposition about the subject
-
+  Examples:
+    | yes | no | protocol  | adopt or drop |
+    | 0   | 0  | Unanimity | drop          |
+    | 1   | 0  | Unanimity | adopt         |
+    | 2   | 1  | Unanimity | drop          |
+    | 2   | 1  | Majority  | adopt         |
+    | 2   | 2  | Majority  | drop          |

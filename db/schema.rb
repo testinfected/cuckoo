@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110713213949) do
+ActiveRecord::Schema.define(:version => 20110719042145) do
 
   create_table "proposals", :force => true do |t|
     t.text     "wording"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "subject"
+    t.string   "protocol_class"
   end
 
   create_table "votes", :force => true do |t|

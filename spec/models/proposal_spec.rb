@@ -2,9 +2,16 @@ require 'spec_helper'
 
 describe Proposal do
 
+  it { should have_db_column(:wording) }
   it { should have_many(:votes) }
+  it { should have_db_column(:protocol_class) }
 
-  specify "default protocol should be unanimity" do
+  it "can build an instance of the protocol" do
+    proposal = Proposal.make(:protocol_class => Unanimity.new.to_s)
+    proposal.protocol.should be_kind_of(Unanimity)
+  end
+
+  specify "default protocol is Unanimity" do
     subject.protocol.should be_kind_of(Unanimity)
   end
 
