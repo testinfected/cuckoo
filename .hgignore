@@ -9,4 +9,5 @@ tmp/**/*
 *.iws
 *.ipr
 *.iml
+*.ids
 db/schema.rb
