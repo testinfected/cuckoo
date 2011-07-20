@@ -8,17 +8,14 @@ class Proposal < ActiveRecord::Base
   end
 
   def outcome
-    protocol.tally(self.votes)
+    protocol.tally(votes)
+  end
+
+  def choices
+    protocol.choices
   end
 
   def breakdown
-    votes_breakdown = {}
-    protocol.choices.each { |choice|
-      votes_breakdown[choice.to_s] = 0
-    }
-    self.votes.each { |vote|
-      votes_breakdown[vote.value.to_s] += 1 if vote.value != nil
-    }
-    votes_breakdown
+    choices.each_with_object({}) { |choice, breakdown| breakdown[choice.to_s] = votes.cast_as(choice).count }
   end
 end

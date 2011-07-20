@@ -3,8 +3,9 @@ require 'spec_helper'
 describe "votes/new.html.haml" do
 
   before(:each) do
-    @proposal = Proposal.make(:id => 1234, :votes => [Vote.make(:value => "first")])
-    @proposal.stub_chain(:protocol, :choices).and_return(["first", "second"])
+    @proposal = Proposal.make(:id => 1234)
+    @proposal.stub(:breakdown) { {:first => 1, :second => 0} }
+    @proposal.stub(:choices) { ["first", "second"] }
     assign(:proposal, @proposal)
     assign(:vote, Vote.make)
     render

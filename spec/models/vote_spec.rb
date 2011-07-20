@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe Vote do
-  it { should belong_to(:proposal)}
+  it { should belong_to(:proposal) }
 end

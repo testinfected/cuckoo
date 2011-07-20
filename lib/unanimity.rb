@@ -3,20 +3,12 @@ require 'protocol'
 class Unanimity < Protocol
   attr_reader :choices
 
-  def to_s
-    "Unanimity"
-  end
-
   def initialize
     @choices = [Yes.new, No.new]
   end
 
-  def has_no?(votes)
-    votes.detect { |vote| vote.value == No.new.to_s }
-  end
-
-  def tally(votes)
-    has_no?(votes) || votes.empty? ? Drop.new : Adopt.new
+  def to_s
+    "Unanimity"
   end
 
   class Yes < Protocol::Choice
@@ -40,5 +32,12 @@ class Unanimity < Protocol
     end
   end
 
+  def tally(votes)
+    has_no?(votes) || votes.empty? ? Drop.new : Adopt.new
+  end
 
+  private
+  def has_no?(votes)
+    votes.detect { |vote| vote.value == No.new.to_s }
+  end
 end

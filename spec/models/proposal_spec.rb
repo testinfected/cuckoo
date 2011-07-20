@@ -22,12 +22,12 @@ describe Proposal do
     end
 
     specify "with one vote" do
-      subject.votes = [Vote.make(:yes)]
+      subject.votes = [Vote.make!(:yes)]
       subject.breakdown.should == { "yes" => 1, "no" => 0 }
     end
 
     specify "with several votes" do
-      subject.votes = [Vote.make(:yes), Vote.make(:yes), Vote.make(:no)]
+      subject.votes = [Vote.make!(:yes), Vote.make!(:yes), Vote.make!(:no)]
       subject.breakdown.should == { "yes" => 2, "no" => 1 }
     end
   end

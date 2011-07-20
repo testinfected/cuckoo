@@ -45,6 +45,13 @@ Spork.prefork do
       # instead of true.
     config.use_transactional_fixtures = true
 
+    # Machinist object caching seems to not play well with Guard
+    Machinist.configure do |machinist|
+      machinist.cache_objects = false
+    end
+
+    config.before(:each) { Machinist.reset_before_test }
+
     # Needed for Spork
     ActiveSupport::Dependencies.clear
     ActiveRecord::Base.instantiate_observers
