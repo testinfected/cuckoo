@@ -37,14 +37,14 @@ describe ProposalsController do
 
   describe "POST create" do
     before(:each) do
-      @proposal_hash = { 'subject' => 'a subject', 'wording' => 'a proposition', 'protocol' => 'a protocol' }
+      @proposal_params = { 'subject' => 'a subject', 'wording' => 'a proposition', 'protocol' => 'a protocol' }
       @proposal = mock_model(Proposal).as_new_record
-      Proposal.should_receive(:new).with(@proposal_hash).and_return(@proposal)
+      Proposal.should_receive(:new).with(@proposal_params).and_return(@proposal)
     end
 
     it "creates proposal and redirects to index" do
       @proposal.should_receive(:save!)
-      post :create, :proposal => @proposal_hash
+      post :create, :proposal => @proposal_params
       response.should redirect_to(:action => 'index')
     end
   end

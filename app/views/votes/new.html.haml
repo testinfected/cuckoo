@@ -1,10 +1,11 @@
 = render @proposal
 
 .vote
-  %h2 Your vote
-  - @proposal.choices.each do |choice|
-    = semantic_form_for [@proposal, @vote] do |form|
-      = form.commit_button choice.to_s, :button_html => { :id => choice.to_s }
+  %h4 Your vote
+  = semantic_form_for [@proposal, @vote] do |form|
+    = form.buttons do
+      - @proposal.choices.each do |choice|
+        = form.commit_button choice.to_s, :button_html => { :id => choice.to_s, :name => "vote[value]" }
 
 %br
 .results

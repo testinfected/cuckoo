@@ -1,3 +1,2 @@
-- breakdown = @proposal.breakdown
-- breakdown.keys.each do |choice|
-  = breakdown[choice].to_s + " " + choice.to_s
+- @proposal.breakdown.each do |choice, count|
+  = count.to_s + " " + choice.to_s
