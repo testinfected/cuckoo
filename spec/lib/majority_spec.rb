@@ -1,4 +1,4 @@
-require "rspec"
+require "spec_helper"
 
 describe Majority do
 
@@ -6,11 +6,8 @@ describe Majority do
     subject.to_s.should == "Majority"
   end
 
-  it "should gives the choice of yes or no" do
-    subject.choices[0].should be_kind_of(Majority::Yes)
-    subject.choices[1].should be_kind_of(Majority::No)
-    Majority::Yes.new.to_s.should == "yes"
-    Majority::No.new.to_s.should == "no"
+  it "gives the choice of yes or no" do
+    subject.choices.should == [:yes, :no]
   end
 
   context "without any vote" do
@@ -22,26 +19,26 @@ describe Majority do
   end
 
   context "with a majority of yes" do
-    let(:yes_votes) { [Vote.make(:yes), Vote.make(:yes), Vote.make(:no)] }
+    let(:majority_of_yeses) { [:yes, :no, :yes] }
 
     it "suggests to adopt the proposal" do
-      subject.tally(yes_votes).should be_kind_of(Majority::Adopt)
+      subject.tally(majority_of_yeses).should be_kind_of(Majority::Adopt)
     end
   end
 
   context "with a majority of no" do
-    let(:no_votes) { [Vote.make(:no), Vote.make(:yes), Vote.make(:no)]}
+    let(:majority_of_nos) { [:no, :yes, :no]}
 
     it "suggests to drop the proposal" do
-      subject.tally(no_votes).should be_kind_of(Majority::Drop)
+      subject.tally(majority_of_nos).should be_kind_of(Majority::Drop)
     end
   end
 
-  context "with same number of no and yes" do
-    let(:votes) { [Vote.make(:yes), Vote.make(:no)] }
+  context "with equal number of yes and no" do
+    let(:split_vote) { [:yes, :no] }
 
     it "suggests to drop the proposal" do
-      subject.tally(votes).should be_kind_of(Majority::Drop)
+      subject.tally(split_vote).should be_kind_of(Majority::Drop)
     end
   end
 
