@@ -1,4 +1,4 @@
-require "rspec"
+require "spec_helper"
 
 describe "proposals/new.html.haml" do
 
@@ -8,22 +8,24 @@ describe "proposals/new.html.haml" do
     render
   end
 
-  it "offers inputs for the subject" do
-    rendered.should match_selector("form", :action => proposals_path(@proposal), :method => 'post') do |form|
-      form.should have_selector("#subject")
+  describe "#new_proposal form" do
+    it "POSTs to create a new proposal" do
+      rendered.should have_selector("form#new_proposal", :action => proposals_path(@proposal), :method => 'post') do |form|
+        form.should have_selector("input", :type => 'submit')
+      end
     end
-  end
 
-  it "offers inputs for the wording" do
-    rendered.should match_selector("form", :action => proposals_path(@proposal), :method => 'post') do |form|
-      form.should have_selector("#wording")
+    specify "subject is an input text" do
+      rendered.should have_selector("#new_proposal input#proposal_subject", :type => 'text', :name => 'proposal[subject]')
     end
-  end
 
-  it "offers to select the protocol of the proposal" do
-    rendered.should match_selector("form", :action => proposals_path(@proposal), :method => 'post') do |form|
-      form.should have_selector("#protocol_class select")
-      form.should match_selector("#protocol_class select") do |options|
+    specify "wording is a textarea" do
+      rendered.should have_selector("#new_proposal textarea#proposal_wording", :name => 'proposal[wording]')
+    end
+
+    it "lists all available protocols for selection" do
+      rendered.should have_selector("#new_proposal select#proposal_protocol_class")
+      rendered.should match_selector("#proposal_protocol_class") do |options|
         options.should have_selector("option", :count => 3)
         options.should have_selector("option", :value=>'')
         options.should have_selector("option", :value=>'one')

@@ -2,12 +2,12 @@
 
 = semantic_form_for @proposal do |form|
   = form.inputs do
-    #subject= form.input :subject
-    #wording= form.input :wording
-    #protocol_class= form.input :protocol_class, :as=>:select, :collection => @protocols
+    = form.input :subject
+    = form.input :wording
+    = form.input :protocol_class, :as => :select, :collection => @protocols
 
   = form.buttons do
-    = form.commit_button :button_html => {:id => 'proposal_submit'}
+    = form.commit_button :button_html => { :id => 'proposal_submit' }
     %li.cancel
       or
       = link_to 'cancel', proposals_path
