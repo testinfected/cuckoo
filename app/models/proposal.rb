@@ -1,12 +1,15 @@
 require 'unanimity'
 
 class Proposal < ActiveRecord::Base
-  has_many :votes
+  cattr_accessor :default_protocol do
+    Unanimity.name
+  end
 
+  has_many :votes
   delegate :choices, :to => :protocol
 
   def protocol
-    self.protocol_class==nil ? Unanimity.new : Object::const_get(self.protocol_class).new()
+    (protocol_class || Proposal.default_protocol).constantize.new
   end
 
   def outcome
