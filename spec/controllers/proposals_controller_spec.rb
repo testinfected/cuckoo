@@ -4,8 +4,7 @@ describe ProposalsController do
 
   describe "GET index" do
     before(:each) do
-      @proposals = []
-      5.times { @proposals << Proposal.make }
+      @proposals = Proposal.make(5)
     end
 
     it "retrieves and assigns all proposals" do
@@ -37,7 +36,7 @@ describe ProposalsController do
 
   describe "POST create" do
     before(:each) do
-      @proposal_params = { 'subject' => 'a subject', 'wording' => 'a proposition', 'protocol' => 'a protocol' }
+      @proposal_params = { 'subject' => 'a subject', 'wording' => 'a proposition', 'protocol' => 'a protocol', 'private' => '1' }
       @proposal = mock_model(Proposal).as_new_record
       Proposal.should_receive(:new).with(@proposal_params).and_return(@proposal)
     end
@@ -45,7 +44,7 @@ describe ProposalsController do
     it "creates proposal and redirects to index" do
       @proposal.should_receive(:save!)
       post :create, :proposal => @proposal_params
-      response.should redirect_to(:action => 'index')
+      response.should redirect_to(proposals_path)
     end
   end
 end
