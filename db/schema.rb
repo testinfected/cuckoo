@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110719042145) do
+ActiveRecord::Schema.define(:version => 20110725235336) do
+
+  create_table "guest_passes", :force => true do |t|
+    t.string   "token"
+    t.integer  "proposal_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "proposals", :force => true do |t|
     t.text     "wording"

@@ -7,7 +7,6 @@
       - @proposal.choices.each do |choice|
         = form.commit_button choice.to_s, :button_html => { :id => choice.to_s, :name => "vote[value]" }
 
-%br
 .results
   %h4 Current results
-  = render "breakdown"
+  = render "votes/breakdown"

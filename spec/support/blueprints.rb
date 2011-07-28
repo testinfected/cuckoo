@@ -1,5 +1,5 @@
 Proposal.blueprint do
-  subject { Faker::Lorem.sentence}
+  subject { Faker::Lorem.sentence }
   wording { Faker::Lorem.paragraph }
 end
 
@@ -13,4 +13,8 @@ end
 
 Vote.blueprint(:no) do
   value { "no" }
+end
+
+GuestPass.blueprint do
+  token { TokenGenerator.friendly_token }
 end

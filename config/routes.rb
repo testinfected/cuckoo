@@ -2,7 +2,10 @@ Cuckoo::Application.routes.draw do
 
   resources :proposals do
     resources :votes
+    resources :guest_passes, :only => [:create]
   end
+
+  match '/guest_passes/:token' => 'guest_passes#use', :as => 'use_guest_pass'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

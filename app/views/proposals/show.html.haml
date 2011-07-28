@@ -1,1 +1,11 @@
 = render @proposal
+
+- if @proposal.shared?
+  .guest_pass
+    Guests can access this proposal using the following link:
+    = use_guest_pass_url(@proposal.guest_pass_token)
+- else
+  = semantic_form_for [@proposal, GuestPass.new] do |form|
+    = form.buttons do
+      = form.commit_button 'Share'
+

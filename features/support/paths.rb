@@ -1,5 +1,6 @@
 module NavigationHelpers
 
+  #todo: consider using Kelp#go_to_page
   def go_to(page_name)
     visit path_to(page_name.to_s.gsub(/_/, ' '))
   end
@@ -21,6 +22,10 @@ module NavigationHelpers
 
     when /^(the )?new proposal page$/
       '/proposals/new'
+
+    when /^(.*) guest pass link$/
+      proposal = Proposal.find_last_by_subject($1)
+      "/guest_passes/#{proposal.guest_pass_token}"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
