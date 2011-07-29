@@ -3,7 +3,7 @@ require "spec_helper"
 describe "proposals/new.html.haml" do
 
   before(:each) do
-    assign(:proposal, Proposal.make)
+    assign(:proposal, stub_model(Proposal).as_new_record)
     assign(:protocols, ["one", "two"])
     render
   end

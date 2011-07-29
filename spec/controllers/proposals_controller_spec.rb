@@ -4,7 +4,7 @@ describe ProposalsController do
 
   describe "GET index" do
     before(:each) do
-      @proposals = Proposal.make(5)
+      @proposals = [] and 5.times { @proposals << mock_model(Proposal) }
     end
 
     it "retrieves and assigns all proposals" do
@@ -24,7 +24,7 @@ describe ProposalsController do
 
   describe "GET show" do
     before(:each) do
-      @proposal = Proposal.make(:id => 1234)
+      @proposal = mock_model(Proposal)
     end
 
     it "retrieves and assigns a proposal" do

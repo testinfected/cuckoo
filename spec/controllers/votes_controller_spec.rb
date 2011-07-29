@@ -3,7 +3,7 @@ require 'spec_helper'
 describe VotesController do
 
   before(:each) do
-    @proposal = Proposal.make(:id => 1234)
+    @proposal = mock_model(Proposal)
     Proposal.should_receive(:find).with(@proposal.id).and_return(@proposal)
   end
 

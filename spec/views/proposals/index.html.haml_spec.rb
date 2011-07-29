@@ -4,7 +4,7 @@ describe "proposals/index.html.haml" do
 
   context "when a proposal exists" do
     before(:each) do
-      assign(:proposals, [@proposal = Proposal.make(:id => 1234)])
+      assign(:proposals, [@proposal = stub_model(Proposal, :id => 1234, :subject => 'Adoption of a cat', :outcome => 'drop')])
       render
     end
 
@@ -19,9 +19,9 @@ describe "proposals/index.html.haml" do
     it "displays proposal details in columns" do
       rendered.should have_selector("tr#proposal_1234 td", :count => 3)
       rendered.should match_selector("tr#proposal_1234 td") do |subject, outcome, vote|
-        subject.should contain(@proposal.subject)
+        subject.should contain('Adoption of a cat')
         subject.should have_selector("a", :href => proposal_path(@proposal))
-        outcome.should contain(@proposal.outcome.to_s)
+        outcome.should contain('drop')
         vote.should have_selector("a", :href => new_proposal_vote_path(@proposal))
       end
     end
@@ -29,7 +29,7 @@ describe "proposals/index.html.haml" do
 
   context "when there are several proposals" do
     before(:each) do
-      assign(:proposals, @proposals = [Proposal.make(:id => 1), Proposal.make(:id => 2), Proposal.make(:id => 3)])
+      assign(:proposals, @proposals = [stub_model(Proposal), stub_model(Proposal), stub_model(Proposal)])
       render
     end
 

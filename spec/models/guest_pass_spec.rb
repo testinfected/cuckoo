@@ -10,7 +10,7 @@ describe GuestPass do
 
   describe "when created" do
     before do
-      @guest_pass = GuestPass.new(:proposal => Proposal.make!)
+      @guest_pass = GuestPass.make(:proposal => Proposal.make!)
       @guest_pass.save!
     end
 

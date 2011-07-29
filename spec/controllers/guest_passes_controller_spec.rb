@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe GuestPassesController do
   before(:each) do
-    @proposal = Proposal.make(:id => 1234)
+    @proposal = mock_model(Proposal)
   end
 
   describe "POST create" do
@@ -21,7 +21,7 @@ describe GuestPassesController do
 
   describe "GET use" do
     before(:each) do
-      guest_pass = GuestPass.make(:proposal => @proposal)
+      guest_pass = mock_model(GuestPass, :proposal => @proposal)
       GuestPass.should_receive(:find_by_token).with('secret_token').and_return(guest_pass)
     end
 

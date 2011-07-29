@@ -4,7 +4,7 @@ describe "proposals/show.html.haml" do
 
   describe "proposal details" do
     before do
-      assign(:proposal, @proposal = stub_model(Proposal, :subject => 'For lunch', :wording => "Let's have a sandwich'"))
+      assign(:proposal, @proposal = stub_model(Proposal, :subject => 'For lunch', :wording => "Let's have a sandwich"))
       render
     end
 
@@ -16,14 +16,14 @@ describe "proposals/show.html.haml" do
 
     it "contains proposal wording" do
       rendered.should match_selector('.wording') do |wording|
-        wording.should contain("Let's have a sandwich'")
+        wording.should contain("Let's have a sandwich")
       end
     end
   end
 
   describe "when not shared" do
     before do
-      assign(:proposal, @proposal = stub_model(Proposal))
+      assign(:proposal, @proposal = stub_model(Proposal, :shared? => false))
       render
     end
 
