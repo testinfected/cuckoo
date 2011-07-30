@@ -15,6 +15,7 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'formtastic', '~> 2.0.0.rc'
+gem 'lazy_high_charts', :git => 'git://github.com/michelson/lazy_high_charts.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'

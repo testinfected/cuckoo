@@ -1,12 +1,13 @@
 = render @proposal
 
-.vote
-  %h4 Your vote
-  = semantic_form_for [@proposal, @vote] do |form|
-    = form.buttons do
-      - @proposal.choices.each do |choice|
-        = form.commit_button choice.to_s, :button_html => { :id => choice.to_s, :name => "vote[value]" }
+%h4 Your vote
+= semantic_form_for [@proposal, @vote] do |form|
+  = form.buttons do
+    - @proposal.choices.each do |choice|
+      = form.commit_button choice.to_s, :button_html => { :id => choice.to_s, :name => "vote[value]" }
 
-.results
+#breakdown
   %h4 Current results
   = render "votes/breakdown"
+
+= results_chart(@proposal)

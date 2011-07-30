@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/michelson/lazy_high_charts.git
+  revision: 2f5e67bf63e145ee66d310ca8cfcadc576bea868
+  specs:
+    lazy_high_charts (1.0.8)
+      bundler (~> 1.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -199,6 +206,7 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   kelp
+  lazy_high_charts!
   machinist (~> 2.0.0.beta)
   rails (~> 3.1.0.rc)
   rb-fsevent

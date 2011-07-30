@@ -12,7 +12,7 @@ describe "votes/new.html.haml" do
   it "displays proposal details" do
     rendered.should have_content(@proposal.subject)
     rendered.should have_content(@proposal.wording)
-    rendered.should match_selector(".results") do |results|
+    rendered.should match_selector("#breakdown") do |results|
       results.should contain("1 first")
       results.should contain("0 second")
     end
