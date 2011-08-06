@@ -1,6 +1,7 @@
 Proposal.blueprint do
   subject { Faker::Lorem.sentence }
   wording { Faker::Lorem.paragraph }
+  protocol_class { %w[Unanimity Majority].sample }
 end
 
 Vote.blueprint do
