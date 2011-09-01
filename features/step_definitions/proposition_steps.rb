@@ -1,13 +1,11 @@
 Given /^a proposal about (.+)$/ do |subject|
-  go_to :proposals_page
-  open_new_proposal
-  create_proposal :about => subject
+  Given "a proposition set up with Unanimity about #{subject}"
 end
 
 Given /^a proposition set up with (.+) about (?:a )?(.+)$/ do |protocol, subject|
   go_to :proposals_page
   open_new_proposal
-  create_proposal :about => subject, :protocol => protocol
+  create_proposal :about => subject, :protocol => protocol, :proposition => ""
 end
 
 When /^there is no vote on (?:the )?(.+)$/ do |subject|
