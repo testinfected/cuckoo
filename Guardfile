@@ -34,3 +34,18 @@ guard 'cucumber', :cli => '--drb --format progress --no-profile', :bundler => fa
   watch(%r{^features/support/.+$})          { 'features' }
   watch(%r{^features/step_definitions/(.+)_steps\.rb$}) { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'features' }
 end
+
+guard 'coffeescript', :output => 'public/javascripts/compiled' do
+  watch(%r{^app/assets/javascripts/(.+).coffee})
+end
+
+guard 'coffeescript', :output => 'spec/javascripts/compiled' do
+  watch(%r{^spec/javascripts/(.+).coffee})
+end
+
+guard 'livereload', :apply_js_live => false do
+  watch(%r{^spec/javascripts/.+\.js$})
+  watch(%r{^spec/javascripts/compiled/.+\.js$})
+  watch(%r{^app/assets/javascripts/.+\.js$})
+  watch(%r{^public/javascripts/compiled/.+\.js$})
+end

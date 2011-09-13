@@ -10,4 +10,7 @@
   %h4 Current results
   = render "votes/breakdown"
 
-= results_chart(@proposal)
+%h4 Casting of votes
+
+#chart
+= visualize_results("#chart", @proposal)

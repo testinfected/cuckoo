@@ -15,7 +15,6 @@ gem 'uglifier'
 gem 'jquery-rails'
 gem 'haml-rails'
 gem 'formtastic', '~> 2.0.0.rc'
-gem 'lazy_high_charts', :git => 'git://github.com/michelson/lazy_high_charts.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -30,6 +29,9 @@ gem 'lazy_high_charts', :git => 'git://github.com/michelson/lazy_high_charts.git
 group :development do
   gem 'guard'
   gem 'guard-rspec'
+  gem 'guard-coffeescript'
+  gem 'guard-livereload'
+  gem 'yajl-ruby'
   gem 'growl'
   gem 'rb-fsevent'
 end
@@ -37,6 +39,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda'
+  gem 'jasmine'
 end
 
 group :test do

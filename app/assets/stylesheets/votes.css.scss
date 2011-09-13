@@ -3,5 +3,26 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body.votes {
-  // Place scoped styles here
+  .chart {
+    margin-left: 0px;
+    font-size: 10px;
+    shape-rendering: crispEdges;
+
+    rect {
+      stroke: white;
+      fill: steelblue;
+    }
+
+    text.bar {
+      font-family: "Lucida Grande";
+      fill: steelblue;
+      font-weight: bold;
+    }
+
+    text.label, text.rule {
+      font-family: "Lucida Grande";
+      font-size: 11px;
+      fill: #666;
+    }
+  }
 }

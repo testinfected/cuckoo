@@ -11,3 +11,4 @@ tmp/**/*
 *.iml
 *.ids
 db/schema.rb
+.DS_Store
