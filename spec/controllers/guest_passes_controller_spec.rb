@@ -7,14 +7,14 @@ describe GuestPassesController do
 
   describe "POST create" do
     before(:each) do
-      Proposal.should_receive(:find).with(@proposal.id).and_return(@proposal)
+      Proposal.should_receive(:find).with(@proposal.to_param).and_return(@proposal)
       @guest_pass = mock_model(GuestPass).as_null_object
       @proposal.should_receive(:build_guest_pass).and_return(@guest_pass)
     end
 
     it "creates a new guest pass and redirects to the proposal" do
       @guest_pass.should_receive(:save!)
-      post :create, :proposal_id => @proposal.id
+      post :create, :proposal_id => @proposal
       response.should redirect_to(@proposal)
     end
   end

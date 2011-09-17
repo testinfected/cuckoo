@@ -28,8 +28,8 @@ describe ProposalsController do
     end
 
     it "retrieves and assigns a proposal" do
-      Proposal.should_receive(:find).with(@proposal.id).and_return(@proposal)
-      get :show, :id => @proposal.id
+      Proposal.should_receive(:find).with(@proposal.to_param).and_return(@proposal)
+      get :show, :id => @proposal
       assigns(:proposal).should == @proposal
     end
   end
