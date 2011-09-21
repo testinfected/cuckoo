@@ -1,34 +1,21 @@
 require 'protocol'
 
 class Unanimity < Protocol
-  class Drop < Protocol::Outcome
-    def to_s
-      "drop"
-    end
-  end
-
-  class Adopt < Protocol::Outcome
-    def to_s
-      "adopt"
-    end
-  end
-
-  @@choices = [:yes, :no]
 
   def to_s
     "Unanimity"
   end
-
-  def choices
-    @@choices.dup
+  
+  class NoUnanimity < Protocol::Outcome
+    def to_s
+      "No unanimity"
+    end
   end
 
-  def tally(votes)
-    has_no?(votes) || votes.empty? ? Drop.new : Adopt.new
+  def tally(breakdown)
+    total = vote_count(breakdown)
+    advice = breakdown.select { |choice, count| count == total }.keys[0]
+    advice = (advice == nil || total == 0) ? NoUnanimity.new : advice
   end
-
-  private
-  def has_no?(votes)
-    votes.detect { |vote| vote == :no }
-  end
+  
 end

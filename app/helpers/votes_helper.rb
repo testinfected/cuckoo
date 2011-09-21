@@ -1,6 +1,6 @@
 module VotesHelper
   def visualize_results(container, proposal)
-    series = proposal.breakdown.keys
+    series = proposal.breakdown.keys.collect { |key| key.label }
     data = proposal.breakdown.values
 
     raw <<-EOJS

@@ -20,6 +20,6 @@ class ProposalsController < ApplicationController
   end
 
   def show
-    respond_with(@proposal = Proposal.find(params[:id]))
+    respond_with(@proposal = Proposal.find(params[:id]), @choice = Choice.new)
   end
 end

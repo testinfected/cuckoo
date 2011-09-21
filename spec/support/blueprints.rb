@@ -19,3 +19,14 @@ end
 GuestPass.blueprint do
   token { TokenGenerator.friendly_token }
 end
+
+Choice.blueprint do
+end
+
+Choice.blueprint(:yes) do
+  label { "yes" }
+end
+
+Choice.blueprint(:no) do
+  label { "no" }
+end

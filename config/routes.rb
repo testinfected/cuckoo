@@ -3,6 +3,7 @@ Cuckoo::Application.routes.draw do
   resources :proposals do
     resources :votes
     resources :guest_passes, :only => [:create]
+    resources :choices
   end
 
   match '/guest_passes/:token' => 'guest_passes#use', :as => 'use_guest_pass'

@@ -29,8 +29,16 @@ describe ProposalsController do
 
     it "retrieves and assigns a proposal" do
       Proposal.should_receive(:find).with(@proposal.to_param).and_return(@proposal)
-      get :show, :id => @proposal
+      get :show, :id => @proposal.id
       assigns(:proposal).should == @proposal
+    end
+    
+    it "assigns a new choice" do
+      @choice = mock_model(Choice)
+      Choice.should_receive(:new).and_return(@choice)
+      Proposal.should_receive(:find).with(@proposal.to_param).and_return(@proposal)
+      get :show, :id => @proposal.id
+      assigns(:choice).should == @choice
     end
   end
 

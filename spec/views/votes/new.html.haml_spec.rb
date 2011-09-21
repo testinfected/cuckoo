@@ -3,10 +3,19 @@ require 'spec_helper'
 describe "votes/new.html.haml" do
 
   before(:each) do
-    @proposal = stub_model(Proposal, :breakdown => {:first => 1, :second => 0}, :choices => ["first", "second"])
+    first = Choice.make(:label=>"first")
+    second = Choice.make(:label=>"second")
+    @proposal = stub_model(Proposal, :breakdown => {first => 1, second => 0}, 
+                                     :choices => [first, second])
     assign(:proposal, @proposal)
     assign(:vote, Vote.make)
     render
+  end
+  
+  it "offers a way to go back to the proposal list" do
+    rendered.should match_selector("a", :href => proposals_path()) do |link|
+      link.should have_content("All proposals")
+    end
   end
 
   it "displays proposal details" do

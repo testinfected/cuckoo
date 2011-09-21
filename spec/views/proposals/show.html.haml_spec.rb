@@ -2,10 +2,24 @@ require 'spec_helper'
 
 describe "proposals/show.html.haml" do
 
+  before do
+    assign(:choice, Choice.make)
+  end
+
   describe "proposal details" do
     before do
-      assign(:proposal, @proposal = stub_model(Proposal, :subject => 'For lunch', :wording => "Let's have a sandwich"))
+      assign(:proposal, @proposal = stub_model(Proposal, 
+                :subject => 'For lunch', 
+                :wording => "Let's have a sandwich", 
+                :choices => [Choice.make(:label=>'a choice for fun')]
+                  ))
       render
+    end
+    
+    it "offers a way to go back to the proposal list" do
+      rendered.should match_selector("a", :href => proposals_path()) do |link|
+        link.should have_content("All proposals")
+      end
     end
 
     it "contains proposal subject" do
@@ -19,6 +33,32 @@ describe "proposals/show.html.haml" do
         wording.should contain("Let's have a sandwich")
       end
     end
+    
+    it "contains proposal protocol" do
+      rendered.should match_selector('.protocol') do |protocol|
+        protocol.should contain('Unanimity')
+      end
+    end
+    
+    it "contains the choices" do
+      rendered.should match_selector('.choices') do |choices|
+        choices.should contain('a choice for fun')
+      end
+    end
+
+    describe "#new_choice form" do
+      it "POSTs to create a new choice" do
+        rendered.should have_selector("form#new_choice", :action => proposal_choices_path(@proposal), :method => 'post')
+        rendered.should match_selector("form#new_choice", :action => proposal_choices_path(@proposal), :method => 'post') do |form|
+          form.should have_selector("input", :type => 'submit', :value => 'Add this choice')
+        end
+      end
+      
+      it "label is an input text" do
+        rendered.should have_selector("#new_choice input#choice_label", :type => 'text', :name => 'choice[label]')
+      end
+    end
+    
   end
 
   describe "when not shared" do

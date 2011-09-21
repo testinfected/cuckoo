@@ -5,32 +5,34 @@ describe Unanimity do
   specify "string representation" do
     subject.to_s.should == "Unanimity"
   end
-
-  it "gives the choice of yes or no" do
-    subject.choices.should == [:yes, :no]
+  
+  specify "No unanimity label" do
+    Unanimity::NoUnanimity.new.to_s.should == "No unanimity"
   end
-
+  
   context "without any vote" do
-    let(:no_vote) { [] }
+    let(:no_vote) { {:yes=>0, :no=>0} }
 
-    it "suggests to drop proposal" do
-      subject.tally(no_vote).should be_kind_of(Unanimity::Drop)
+    it "cannot find unanimity" do
+      subject.tally(no_vote).should be_kind_of(Unanimity::NoUnanimity)
+    end
+  end
+  
+  context "with one single represented choice" do
+    let(:one_vote) { { :yes=>2, :no=>0 }}
+    
+    it "suggest to follow this single vote" do
+      subject.tally(one_vote).should == :yes
     end
   end
 
-  context "with only yes votes" do
-    let(:votes) { [:yes, :yes, :yes] }
+  context "with several represented choices" do
+    let(:votes) { {:yes=>10, :no=>11} }
 
-    it "suggests to adopt proposal" do
-      subject.tally(votes).should be_kind_of(Unanimity::Adopt)
+    it "cannot find unanimity" do
+      subject.tally(votes).should be_kind_of(Unanimity::NoUnanimity)
     end
   end
 
-  context "with at least one no vote" do
-    let(:votes) { [:yes, :no, :yes] }
 
-    it "suggests to drop proposal" do
-      subject.tally(votes).should be_kind_of(Unanimity::Drop)
-    end
-  end
 end

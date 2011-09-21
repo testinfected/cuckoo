@@ -8,13 +8,30 @@ Given /^a proposition set up with (.+) about (?:a )?(.+)$/ do |protocol, subject
   create_proposal :about => subject, :protocol => protocol, :proposition => ""
 end
 
-When /^there is no vote on (?:the )?(.+)$/ do |subject|
-  # do nothing
+Given /^the following available choices on (?:the )?(.+)$/ do |subject, table|
+  table.rows.each { |choice| 
+    go_to :proposals_page
+    view_proposal :about => subject
+    add_choice choice
+  }
 end
-
-Then /^the outcome is to (.+) the proposition about (?:the )?(.+)$/ do |suggested, subject|
+When /^there are the following votes on (?:the )?(.+)$/ do |subject, table|
+  table.rows.each { |choice, number|
+    number.to_i.times {
+      go_to :proposals_page
+      participate_in_vote :about => subject
+      cast_vote choice
+    }
+  }
+end
+Then /^the outcome of the proposition about (?:the )?(.+) is "([^"]*)"$/ do |subject, suggested|
   go_to :proposals_page
   should_see_proposal_outcome suggested, :about => subject
+end
+
+
+When /^there is no vote on (?:the )?(.+)$/ do |subject|
+  # do nothing
 end
 
 When /^someone votes (.+) on (?:the )?(.+)$/ do |choice, subject|

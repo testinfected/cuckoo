@@ -5,3 +5,15 @@
 .wording
   Wording:
   = @proposal.wording
+
+.protocol
+  Protocol:
+  = @proposal.protocol
+
+.choices
+  Available choices:
+  %ul
+    - @proposal.choices.each do |choice|
+      %li
+        = choice.label
+

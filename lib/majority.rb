@@ -1,30 +1,20 @@
 require 'protocol'
 
 class Majority < Protocol
-  class Drop < Protocol::Outcome
-    def to_s
-      "drop"
-    end
-  end
-  class Adopt < Protocol::Outcome
-    def to_s
-      "adopt"
-    end
-  end
-
-  @@choices = [:yes, :no]
-
-  def choices
-    @@choices.dup
-  end
-
   def to_s
     "Majority"
   end
 
-  def tally(votes)
-    yes = votes.select { |vote| vote == :yes }
-    no = votes.select { |vote| vote == :no }
-    yes.size > no.size ? Adopt.new : Drop.new
+  class NoMajority < Protocol::Outcome
+    def to_s
+      "No majority"
+    end
   end
+
+  def tally(breakdown)
+    fifty_percent = vote_count(breakdown)/2
+    advice = breakdown.select { |choice, count| count > fifty_percent }.keys[0]
+    advice = advice == nil ? NoMajority.new : advice
+  end
+  
 end

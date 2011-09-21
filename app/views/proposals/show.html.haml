@@ -1,4 +1,13 @@
+= link_to "All proposals", proposals_path()
+
 = render @proposal
+
+Add a new choice:
+= semantic_form_for [@proposal, @choice] do |form|
+  = form.inputs do
+    = form.input :label
+  = form.buttons do
+    = form.commit_button 'Add this choice'
 
 - if @proposal.shared?
   .guest_pass

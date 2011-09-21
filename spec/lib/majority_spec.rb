@@ -5,41 +5,66 @@ describe Majority do
   specify "string representation" do
     subject.to_s.should == "Majority"
   end
-
-  it "gives the choice of yes or no" do
-    subject.choices.should == [:yes, :no]
+  
+  specify "No majority label" do
+    Majority::NoMajority.new.to_s.should == "No majority"
   end
 
   context "without any vote" do
-    let(:no_vote) { [] }
+    let(:no_vote) { {:yes=>0, :no=>0} }
 
-    it "suggests to drop proposal" do
-      subject.tally(no_vote).should be_kind_of(Majority::Drop)
+    it "cannot find a majority" do
+      subject.tally(no_vote).should be_kind_of(Majority::NoMajority)
+    end
+  end
+  
+  context "with one single vote" do
+    let(:one_vote) { { :yes=>1, :no=>0 }}
+    
+    it "suggest to follow this single vote" do
+      subject.tally(one_vote).should == :yes
     end
   end
 
-  context "with a majority of yes" do
-    let(:majority_of_yeses) { [:yes, :no, :yes] }
+  context "with a majority between two choices" do
+    let(:a_majority) { {:yes=>10, :no=>11} }
 
-    it "suggests to adopt the proposal" do
-      subject.tally(majority_of_yeses).should be_kind_of(Majority::Adopt)
+    it "suggests to follow the advice of the majority" do
+      subject.tally(a_majority).should == :no
     end
   end
+  
+  context "with a floating vote between two choices" do
+    let(:a_floating) { {:yes=>10, :no=>10} }
 
-  context "with a majority of no" do
-    let(:majority_of_nos) { [:no, :yes, :no]}
-
-    it "suggests to drop the proposal" do
-      subject.tally(majority_of_nos).should be_kind_of(Majority::Drop)
+    it "suggests to wait for more votes" do
+      subject.tally(a_floating).should be_kind_of(Majority::NoMajority)
     end
   end
+  
+  context "with a majority between three choices" do
+    let(:a_majority) { {:red=>20, :green=>20, :blue=>60} }
 
-  context "with equal number of yes and no" do
-    let(:split_vote) { [:yes, :no] }
-
-    it "suggests to drop the proposal" do
-      subject.tally(split_vote).should be_kind_of(Majority::Drop)
+    it "suggests to follow the advice of the majority" do
+      subject.tally(a_majority).should == :blue
     end
   end
+  
+  context "with no majority between three choices" do
+    let(:no_majority) { {:red=>20, :green=>20, :blue=>30} }
+
+    it "suggests to wait for more votes" do
+      subject.tally(no_majority).should be_kind_of(Majority::NoMajority)
+    end
+  end
+  
+  describe "algorithm" do
+    let(:votes) { {:red=>20, :green=>20, :blue=>30} }
+    
+    it "computes the total vote number" do
+      subject.vote_count(votes).should == 70
+    end
+  end
+  
 
 end

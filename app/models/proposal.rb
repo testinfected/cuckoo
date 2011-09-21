@@ -7,7 +7,7 @@ class Proposal < ActiveRecord::Base
 
   has_many :votes
   has_one :guest_pass
-  delegate :choices, :to => :protocol
+  has_many :choices
 
   def protocol
     (protocol_class || Proposal.default_protocol).constantize.new
@@ -22,7 +22,7 @@ class Proposal < ActiveRecord::Base
   end
 
   def outcome
-    protocol.tally(votes.collect { |v| v.choice })
+    protocol.tally(breakdown)
   end
 
   def breakdown
